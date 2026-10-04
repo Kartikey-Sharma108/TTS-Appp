@@ -1,0 +1,67 @@
+{
+  "info": {
+    "name": "Text-to-Speech API",
+    "description": "Postman collection for the TTS application backend (POST /api/tts, GET /api/voices, GET /api/health).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:5000" }],
+  "item": [
+    {
+      "name": "Health check",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/health"
+      }
+    },
+    {
+      "name": "List voices",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/voices"
+      }
+    },
+    {
+      "name": "Generate speech",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"Hello, welcome to the Text-to-Speech application.\",\n  \"language\": \"en-US\",\n  \"voice\": \"en-us-ava\"\n}"
+        },
+        "url": "{{baseUrl}}/api/tts"
+      }
+    },
+    {
+      "name": "Generate speech - Hindi",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"नमस्ते, आपका स्वागत है।\",\n  \"language\": \"hi-IN\",\n  \"voice\": \"hi-in-swara\"\n}"
+        },
+        "url": "{{baseUrl}}/api/tts"
+      }
+    },
+    {
+      "name": "Generate speech - invalid (text too long)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"text\": \"<paste more than 500 characters here>\",\n  \"language\": \"en-US\",\n  \"voice\": \"en-us-ava\"\n}"
+        },
+        "url": "{{baseUrl}}/api/tts"
+      }
+    },
+    {
+      "name": "Download audio",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/tts/download/<fileId-from-tts-response>"
+      }
+    }
+  ]
+}

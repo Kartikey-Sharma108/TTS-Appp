@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.npm
+package-lock.json
+
+
+# Environment variables (API keys - NEVER commit)
+.env
+.env.local
+.env.*.local
+
+# Build output
+client/dist/
+dist/
+build/
+
+
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
